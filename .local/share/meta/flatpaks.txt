@@ -1,7 +1,6 @@
 ch.tlaun.TL
-com.discordapp.Discord
-com.getpostman.Postman
+dev.vencord.Vesktop
 com.github.tchx84.Flatseal
-com.ktechpit.whatsie
 md.obsidian.Obsidian
+io.github.giantpinkrobots.flatsweep
 org.vinegarhq.Sober
