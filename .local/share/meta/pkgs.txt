@@ -10,6 +10,7 @@ alsa-plugins
 alsa-plugins-32bit
 alsa-utils
 amiri-font
+android-tools
 android-udev-rules
 apparmor
 atool
