@@ -5,13 +5,11 @@ lazygit
 ImageMagick
 Vulkan-Tools
 Waybar
-+aardvark-dns
 alsa-lib-32bit
 alsa-plugins
 alsa-plugins-32bit
 alsa-utils
 amiri-font
-+android-tools
 android-udev-rules
 apparmor
 atool
