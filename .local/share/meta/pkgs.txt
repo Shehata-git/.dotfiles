@@ -254,3 +254,8 @@ zig
 zk
 zr
 zsh
+openresolv
+elogind
+dbus-elogind
+polkit-elogind
+xdg-desktop-portal-hyprland
