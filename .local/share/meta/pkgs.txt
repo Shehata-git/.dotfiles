@@ -254,6 +254,7 @@ zbar
 zig
 zk
 zr
+zramen
 zsh
 openresolv
 elogind
