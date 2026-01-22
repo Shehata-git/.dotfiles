@@ -261,3 +261,4 @@ elogind
 dbus-elogind
 polkit-elogind
 xdg-desktop-portal-hyprland
+zstd
