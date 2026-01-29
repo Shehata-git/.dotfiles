@@ -81,6 +81,7 @@ iwd
 jq
 jujutsu
 kanshi
+keyd
 kubernetes
 kvantum
 ldns
