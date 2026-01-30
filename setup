@@ -81,9 +81,6 @@ setup_user() {
 			xdg-user-dirs-update
 	}
 	chsh -s "$(which zsh)"
-<<<<<<< HEAD
-	$sudocmd usermod -aG video,audio,input,storage,optical,network,lp,scanner,kvm,adbusers,dbus,nixbld,socklog,libvirt,docker,wheel "$USER"
-=======
 	$sudocmd usermod -aG video,audio,input,storage,optical,network,lp,scanner "$USER"
 	[ -c /dev/kvm ] &&
 		$sudocmd usermod -aG kvm "$USER"
@@ -102,7 +99,6 @@ setup_user() {
 	command -v nix >/dev/null 2>&1 &&
 		$sudocmd usermod -aG nixbld "$USER"
 	return 0
->>>>>>> 7e738a9 (setup: improve code quality)
 }
 
 setup_runit() {
