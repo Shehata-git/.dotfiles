@@ -155,6 +155,7 @@ pkg-config
 plocate
 podman
 podman-compose
+power-profiles-daemon
 poweralertd
 python3-lxml
 python3-pexpect
