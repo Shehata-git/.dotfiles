@@ -1,5 +1,5 @@
 [Desktop Entry]
 Type=Application
 Name=File Manager
-Icon=nnn
-Exec=foot nnn -Rr %u
+Icon=yazi
+Exec=kitty yazi %u
