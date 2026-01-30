@@ -75,7 +75,6 @@ hwinfo
 impala
 imv
 intel-ucode
-inxi
 isync
 iwd
 jq
