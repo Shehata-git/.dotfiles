@@ -1,35 +1,41 @@
+[user]
+	name = Mohamed Shehata
+	email = shehataofficialmail@gmail.com
+	signingkey = /home/star/.ssh/id_ed25519.pub
 [init]
-	defaultBranch = main
-
+	defaultBranch = master
+[credential]
+	helper = store
+[pull]
+	rebase = true
+[core]
+	editor = lvim
+[safe]
+	directory = /home/star/mnt/New Volume D/Courses/DEPI/Projects/Senti-DEPI
+[gpg]
+	format = ssh
+[commit]
+	gpgsign = true
 [core]
 	editor = nvim
 	pager = delta
 	hooksPath = ~/.config/git/hooks
-
-[user]
-	name = Omar Mohamed
-	email = omarcoptan9@gmail.com
-	signingkey = ~/.ssh/id_ed25519.pub
-
-[gpg]
-	format = ssh
-
-[commit]
-	gpgSign = true
-
-[push]
-	default = simple
-	autoSetupRemote = true
-
-[pull]
-	rebase = true
-
-[rebase]
-	autoStash = true
-
-[rerere]
-	enabled = true
-
+[delta]
+	tabs = 4
+	side-by-side = false
+	line-numbers = true
+	syntax-theme = Nord
+	file-modified-label = modified:
+[diff]
+	tool = nvimdiff
+[difftool]
+	prompt = false
+[gpg "ssh"]
+	allowedSignersFile = /home/star/.ssh/allowed_signers
+; [url "git@github.com:"]
+; 	insteadOf = https://github.com/
+; [url "git@gitlab.com:"]
+; 	insteadOf = https://gitlab.com/
 [alias]
 	a = add
 	co = checkout
@@ -43,22 +49,4 @@
 	tree = ls-tree --full-tree -r HEAD
 	logg = log --oneline --graph --decorate
 	undo = reset --soft HEAD^
-
-[delta]
-	tabs = 4
-	side-by-side = false
-	line-numbers = true
-	syntax-theme = Nord
-	file-modified-label = modified:
-
-[review "review.lineageos.org"]
-	username = Coptan99
-
-[trailer "changeid"]
-	key = Change-Id
-
-[diff]
-	tool = nvimdiff
-
-[difftool]
-	prompt = false
+	nuke = "!f() { git branch -d \"$1\" && git push origin --delete \"$1\"; }; f"
