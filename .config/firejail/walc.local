@@ -1,0 +1,7 @@
+# Config Permissions
+noblacklist ${HOME}/.config/walc
+read-write ${HOME}/.config/walc
+
+# Allow talking to the desktop portal
+dbus-user.talk org.freedesktop.portal.Desktop
+dbus-user.talk org.freedesktop.portal.Documents

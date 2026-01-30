@@ -1,0 +1,7 @@
+# Vencord Permissions
+noblacklist ${HOME}/.config/Vencord
+read-write ${HOME}/.config/Vencord
+
+# Allow talking to the desktop portal
+dbus-user.talk org.freedesktop.portal.Desktop
+dbus-user.talk org.freedesktop.portal.Documents

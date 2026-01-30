@@ -1,0 +1,14 @@
+# 1. Allow communication with Wayland/Portals
+ignore dbus-user none
+
+# 2. Fix the "Read Only" / Socket creation crash
+# Telegram puts a socket in /run/user/1000/ that Firejail is hiding
+ignore private-tmp
+noblacklist ${RUNUSER}
+
+# 3. If you use custom themes/fonts that are breaking
+noblacklist ${HOME}/.config
+noblacklist ${HOME}/.local/share
+
+# 4. Prevent AppArmor from interfering (common on Artix)
+ignore apparmor

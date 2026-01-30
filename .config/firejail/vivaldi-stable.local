@@ -1,0 +1,11 @@
+# Allow vivaldi config
+noblacklist ${HOME}/.config/vivaldi
+read-write ${HOME}/.config/vivaldi
+
+# Allow Uni Folder
+noblacklist ${HOME}/education/uni/F-Fourth Year
+read-write ${HOME}/education/uni/F-Fourth Year
+
+# DBus integration
+dbus-user.talk org.freedesktop.portal.Desktop
+dbus-user.talk org.freedesktop.portal.Documents

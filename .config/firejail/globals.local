@@ -1,0 +1,9 @@
+# Lock down Home (Read-Only)
+read-only ${HOME}
+
+# Open up common data folders (Read-Write)
+read-write ${HOME}/Downloads
+read-write ${HOME}/Documents
+read-write ${HOME}/Pictures
+read-write ${HOME}/Videos
+read-write ${HOME}/Music
