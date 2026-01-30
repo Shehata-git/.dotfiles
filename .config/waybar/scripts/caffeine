@@ -1,0 +1,21 @@
+#!/usr/bin/env bash
+
+if [ "$1" == "toggle" ]; then
+    if pgrep -x "hypridle" > /dev/null; then
+        pkill hypridle
+        notify-send -u low "☕ Caffeine Mode" "Hypridle stopped"
+    else
+        hypridle &
+        notify-send -u low "󰒲 Decaf Mode" "Hypridle resumed"
+    fi
+    # Wait 100ms to ensure the process state updates before Waybar checks
+    sleep 0.1
+    pkill -SIGRTMIN+10 waybar
+    exit 0
+fi
+
+if pgrep -x "hypridle" > /dev/null; then
+    echo '{"text": "󰒲", "tooltip": "Decaf: Hypridle is running", "class": "decaf"}'
+else
+    echo '{"text": "", "tooltip": "Caffeine: Hypridle is stopped", "class": "caffeine"}'
+fi

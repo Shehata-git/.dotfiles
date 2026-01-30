@@ -1,38 +1,58 @@
 {
 	"layer": "top",
 	"position": "top",
-	"height": 1,
+	"reload_style_on_change": true,
 	"modules-left": [
-		"river/tags",
-		"river/mode",
+		"hyprland/workspaces"
 	],
 	"modules-center": [
 		"clock#date",
-		"clock#time",
+		"clock#time"
 	],
 	"modules-right": [
-		"mpris",
-		"privacy",
-		"custom/recording",
-		"tray",
-		"custom/dnd",
+		"group/tray-drawer",   // <--- Replaces "tray"
+		//"tray",
+		"wireplumber#mic",
 		"wireplumber",
 		"bluetooth",
 		"network",
-		"battery",
+		"cpu",
+		"memory",
+		"upower",
+		"custom/caffeine"
 	],
-	"river/tags": {
-		"num-tags": 9,
-		"hide-vacant": true,
+	"hyprland/workspaces": {
+		"format": "{name}: {icon}",
+		"format-icons": {
+			"active": "",
+			"default": ""
+		}
+	},
+	"tray": {
+		"icon-size": 21,
+		"spacing": 10
+	},
+	"group/tray-drawer": {
+		"orientation": "horizontal",
+		"modules": ["custom/tray-icon", "tray"],
+		"drawer": {
+			"transition-duration": 500,
+			"children-class": "tray-expanded",
+			"transition-left-to-right": true
+		}
+	},
+	"custom/tray-icon": {
+		"format": "  ", // Icon to click (Chevron Left)
+		"tooltip": false
 	},
 	"clock#time": {
 		"interval": 10,
-		"format": "{:%H:%M}",
-		"tooltip": false,
+		"format": " {:%I:%M}",
+		"tooltip": false
 	},
 	"clock#date": {
 		"interval": 60,
-		"format": "{:%a}",
+		"format": " {:%a %d %b}",
 		"tooltip-format": "<span size='10pt'>{calendar}</span>",
 		"calendar": {
 			"mode": "month",
@@ -44,21 +64,64 @@
 				"days": "<span color='#eceff4'><b>{}</b></span>",
 				"weeks": "<span color='#8fbcbb'><b>W{}</b></span>",
 				"weekdays": "<span color='#81a1c1'><b>{}</b></span>",
-				"today": "<span color='#bf616a'><b><u>{}</u></b></span>",
-			},
+				"today": "<span color='#bf616a'><b><u>{}</u></b></span>"
+			}
 		},
 		"actions": {
 			"on-click": "shift_reset",
 			"on-click-right": "mode",
 			"on-scroll-up": "shift_up",
-			"on-scroll-down": "shift_down",
+			"on-scroll-down": "shift_down"
 		}
 	},
-	"wireplumber": {
+	"bluetooth": {
+		"format": "",
+		"format-connected": " {device_alias}",
+		"format-connected-battery": " {device_battery_percentage}%",
+		"format-disabled": "󰂲",
+		"format-no-controller": "",
+		"on-click": "kitty --class waybar-floating bluetoothctl",
+		"tooltip-format": "{controller_alias}\t{controller_address}",
+		"tooltip-format-connected": "{controller_alias}\t{controller_address}\n{device_enumerate}",
+		"tooltip-format-enumerate-connected": "- {device_alias}\t[{device_address}]",
+		"tooltip-format-enumerate-connected-battery": "- {device_alias}\t[{device_address}]\t({device_battery_percentage}%)"
+	},
+	"network": {
+		"interval": 60,
+		"format-icons": ["󰤯", "󰤟", "󰤢", "󰤥", "󰤨"],
 		"format": "{icon}",
-		"format-muted": "",
-		"tooltip-format": "{volume}% - {node_name}",
-		"on-click": "foot -a float wiremix",
+	    "format-wifi": "{icon} {signalStrength}%",
+		"format-ethernet": "{ipaddr}/{cidr} ",
+		"format-disconnected": "󰤮",
+		"on-click": "kitty --class float nmtui",
+		"tooltip-format": "{ifname} via {gwaddr} 󰊗",
+		"tooltip-format-wifi": "{essid} ({frequency}GHz)\n{ipaddr}/{cidr} at {ifname}",
+		"tooltip-format-ethernet": "{ifname} ",
+		"tooltip-format-disconnected": "Disconnected"
+	},
+	"cpu": {
+		"interval": 1,
+		"format": "  {icon0}{icon1}{icon2}{icon3} {usage:>2}%",
+		"format-icons": ["▁", "▂", "▃", "▄", "▅", "▆", "▇", "█"]
+	},
+	"memory": {
+		"interval": 30,
+		"format": " {used:0.1f}G",
+		"tooltip-format": "mem:  {used:0.1f}G/{total:0.1f}G ({percentage}%)\nswap: {swapUsed:0.1f}G/{swapTotal:0.1f}G ({swapPercentage}%)",
+		"max-length": 10
+	},
+	"wireplumber#mic": {
+		"node-type": "Audio/Source",
+		"format": " ",
+		"format-muted": "",
+		"format-source": true,
+		"on-click": "volumectl togglemic",
+		"tooltip": true
+	},
+	"wireplumber": {
+		"format": "{icon} {volume}%",
+		"format-muted": "󰝟 muted",
+		"on-click": "pavucontrol",
 		"on-click-right": "helvum",
 		"on-click-middle": "volumectl toggle",
 		"max-volume": 200,
@@ -70,8 +133,12 @@
 			"phone": "",
 			"portable": "",
 			"car": "",
-			"default": ["", "", ""],
-		},
+			"default": [
+				"",
+				"",
+				""
+			]
+		}
 	},
 	"upower": {
 		"format": " {percentage}",
@@ -79,108 +146,17 @@
 		"tooltip": true,
 		"tooltip-spacing": 20,
 		"icon-size": 16,
-		"hide-if-empty": true,
+		"hide-if-empty": true
 	},
-	"battery": {
-		"interval": 5,
-		"format": "{capacity}% {icon}",
-		"format-discharging": "{icon}",
-		"format-charging": "{icon}",
-		"format-plugged": "",
-		"format-icons": {
-			"charging": ["󰢜", "󰂆", "󰂇", "󰂈", "󰢝", "󰂉", "󰢞", "󰂊", "󰂋", "󰂅"],
-			"default": ["󰁺", "󰁻", "󰁼", "󰁽", "󰁾", "󰁿", "󰂀", "󰂁", "󰂂", "󰁹"],
-		},
-		"format-full": "󰂅",
-		"tooltip-format-discharging": "{power:>1.0f}W↓ {capacity}%",
-		"tooltip-format-charging": "{power:>1.0f}W↑ {capacity}%",
-		"on-click": "menu-handler sysact",
-		"states": {
-			"warning": 20,
-			"critical": 10
-		},
-	},
-	"network": {
-		"interval": 60,
-		"format-icons": ["󰤯", "󰤟", "󰤢", "󰤥", "󰤨"],
-		"format": "{icon}",
-		"format-wifi": "{icon}",
-		"format-ethernet": "{ipaddr}/{cidr} ",
-		"format-disconnected": "󰤮",
-		"on-click": "foot -a float --window-size-pixels 980x620 impala",
-		"tooltip-format": "{ifname} via {gwaddr} 󰊗",
-		"tooltip-format-wifi": "{essid} ({frequency}GHz) {signalStrength}% \n{ifname}: {ipaddr}/{cidr}",
-		"tooltip-format-ethernet": "{ifname} ",
-		"tooltip-format-disconnected": "Disconnected",
-	},
-	"bluetooth": {
-		"format": "",
-		"format-off": "󰂲",
-		"format-disabled": "󰂲",
-		"format-connected": "󰂱",
-		"format-no-controller": "",
-		"on-click": "foot -a float bluetui",
-		"tooltip-format": "{controller_alias}\t{controller_address}",
-		"tooltip-format-connected": "{controller_alias}\t{controller_address}\n{device_enumerate}",
-		"tooltip-format-enumerate-connected": "- {device_alias}\t[{device_address}]",
-		"tooltip-format-enumerate-connected-battery": "- {device_alias}\t[{device_address}]\t({device_battery_percentage}%)",
-	},
-	"privacy": {
-		"icon-spacing": 4,
-		"icon-size": 14,
-		"transition-duration": 250,
-		"ignore-monitor": true,
-		"ignore": [
-			{
-				"type": "audio-in",
-				"name": "echo-cancel-capture",
-			},
-		],
-		"modules": [
-			{
-				"type": "screenshare",
-				"tooltip": true,
-				"tooltip-icon-size": 24,
-			},
-			{
-				"type": "audio-in",
-				"tooltip": true,
-				"tooltip-icon-size": 24,
-			},
-		],
-	},
-	"tray": {
-		"icon-size": 18,
-		"spacing": 15
-	},
-	"mpris": {
-		"player": "playerctld",
-		"format": "{status_icon}",
-		"tooltip-format": "{title} • {artist}",
-		"title-len": 10,
-		"artist-len": 10,
-		"status-icons": {
-			"paused": "",
-			"stopped": "",
-			"playing": "",
-		},
-	},
-	"custom/dnd": {
+	"custom/caffeine": {
+		"exec": "~/.config/waybar/scripts/caffeine",
+		"return-type": "json",
+		"interval": 3,
 		"format": "{}",
-		"interval": "once",
-		"exec": "$XDG_CONFIG_HOME/waybar/scripts/dnd",
-		"on-click": "makoctl mode -r dnd >/dev/null 2>&1",
-		"tooltip": false,
-		"hide-empty-text": true,
-		"signal": 6,
+		"on-click": "~/.config/waybar/scripts/caffeine toggle",
+		"signal": 10
 	},
-	"custom/recording": {
-		"format": "{}",
-		"interval": "once",
-		"exec": "echo ''",
-		"exec-if": "pidof -sqx wf-recorder",
-		"on-click": "menu-handler screenrec stop",
-		"tooltip": false,
-		"signal": 8,
-	},
+	"later": {
+		"format": "<span class='icon'>{icon}</span> <span class='text'>{text}</span>"
+	}
 }
