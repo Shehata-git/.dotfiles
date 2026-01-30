@@ -30,8 +30,7 @@ home="$(getent passwd "$user" | cut -d ":" -f 6)"
 	}
 
 
-locker="waylock"
-[ -x "$home/.local/bin/locker" ] && locker="$home/.local/bin/locker"
+locker="hyprlock"
 
 chpst \
 	-u "$user" \
