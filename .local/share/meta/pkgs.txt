@@ -16,6 +16,7 @@ apparmor
 atool
 bat
 qalc
+bluetui
 bluez
 brightnessctl
 btop
