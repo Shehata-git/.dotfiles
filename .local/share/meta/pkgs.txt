@@ -175,7 +175,7 @@ ripgrep
 river
 rsync
 rtkit
-rustup
+samba
 satty
 sc-im
 scrcpy
